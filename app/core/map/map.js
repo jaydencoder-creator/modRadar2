@@ -1,7 +1,24 @@
-mapboxgl.accessToken = 'pk.eyJ1IjoidHdhbGtlcjkyIiwiYSI6ImNtZDkwaHMwdTAyazkya3BzNXphYWI3a2kifQ.sWYO653OYlYHYc_wOHsd2A';
-const map = new mapboxgl.Map({
+window.mapboxgl = maplibregl;
+const map = new maplibregl.Map({
     container: 'map',
-    style: 'mapbox://styles/twalker92/cmd90758s006r01s2df82drgf',
+    style: {
+        version: 8,
+        sources: {
+            'osm-tiles': {
+                type: 'raster',
+                tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                attribution: '© OpenStreetMap contributors',
+            },
+        },
+        layers: [
+            {
+                id: 'osm-tiles',
+                type: 'raster',
+                source: 'osm-tiles',
+            },
+        ],
+    },
     zoom: 3, // 2
     center: [-98.5606744, 36.8281576], // [111.83024360762363, 27.174263144019363]
     maxZoom: 20,
